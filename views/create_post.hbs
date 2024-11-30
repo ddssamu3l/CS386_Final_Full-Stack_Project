@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <h1>Create a New Post</h1>
+    <form action="/create" method="POST" id="createPostForm">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="title" 
+                name="title" 
+                placeholder="enter post title" 
+                required
+            >
+            <small class="form-text text-muted">The title of your post.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea 
+                class="form-control" 
+                id="content" 
+                name="content" 
+                rows="5" 
+                placeholder="enter post content" 
+                required
+            ></textarea>
+            <small class="form-text text-muted">The main content of your post.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="tag">Tag</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="tag" 
+                name="tag" 
+                placeholder="enter tag" 
+                required
+            >
+            <small class="form-text text-muted">A tag to categorize your post.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="authorEmail">Author Email</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="authorEmail" 
+                name="authorEmail" 
+                placeholder="enter your email" 
+                required
+            >
+            <small class="form-text text-muted">Your email address.</small>
+        </div>
+
+        <button type="submit" class="btn">Submit Post</button>
+        <button type="button" class="backBtn">Cancel</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#createPostForm").on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/insert-post',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    alert('Post created successfully!');
+                    window.location.href = '/';
+                },
+                error: function(xhr, status, error) {
+                    alert('Error creating post: ' + error);
+                }
+            })
+        });
+        $(".backBtn").click(function(){
+            window.location.href = '/';
+        });
+    })
+</script>

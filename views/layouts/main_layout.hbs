@@ -1,0 +1,33 @@
+<!-- views/layouts/main_layout.hbs -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prompt-a-Chat</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
+    </head>
+    <body>
+        <div style="padding-bottom: 100px;">
+            <button type="button" class="home-button" id="home-button" name="home-button">Prompt-a-Chat</button>
+            <button type="button" class="create-button" id="create-button" name="create-button">Create and share your own post!</button>
+        </div>
+       
+        {{{body}}}
+        <footer>
+            {{>footer}}
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#create-button').on('click', function() {
+                    window.location.href = '/create';
+                });
+                $('#home-button').on('click', function() {
+                    window.location.href = '/';
+                });
+            });
+        </script>
+    </body>
+</html>
+
+

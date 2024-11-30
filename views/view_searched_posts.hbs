@@ -1,0 +1,56 @@
+<h1>Search results for: <br />
+    <span style="color: blue;">{{queryString}}</span>
+</h1>
+
+ <div style="margin-top: 80px; margin-bottom: 80px;">
+    {{#each posts}}
+        <div class="post-container">
+            <div class="post-header">
+                <div >{{authorEmail}}</div>
+                <button class="copy-button" data-content-id="content-{{_id}}" aria-label="Copy content"></button>
+            </div>
+            
+            <div class="post-title">
+                {{title}}
+            </div>
+            <div class="post-content-box" id="content-{{_id}}">
+                {{content}}
+            </div>
+            <div class="post-footer">
+                <div>#{{tag}}</div>
+                <div>{{formatDate date}}</div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.copy-button').each(function() {
+            $(this).text('📋');
+        }).on('click', function() {
+            console.log("post copied");
+            var $button = $(this);
+            var contentId = $button.data('content-id');
+            var contentToCopy = $('#' + contentId).text();
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(contentToCopy)
+                    .then(function() {
+                        $button.text('✅');
+                        setTimeout(function() {
+                            $button.text('📋');
+                        }, 1500);
+                    })
+                    .catch(function(err) {
+                        console.error('Failed to copy text: ', err);
+                        alert('Failed to copy text. Please try manually.');
+                    });
+            } else {
+                alert('Clipboard API not available. Please copy manually.');
+            }
+        });
+    });
+</script>
