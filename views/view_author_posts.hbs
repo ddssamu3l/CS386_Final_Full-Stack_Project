@@ -1,5 +1,6 @@
-<h1>Search results for: <br />
-    <span style="color: blue;">{{queryString}}</span>
+<h1>
+    <span style="color: blue;">{{username}}</span>
+    's profile <br />
 </h1>
 
  <div style="margin-top: 80px; margin-bottom: 80px;">
@@ -28,11 +29,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.authorEmail').on('click', function(){
-            var authorEmail = $(this).text();
-            window.location.href = '/author/' +  encodeURIComponent(authorEmail);
-        });
-
          $('.tag').on('click', function(){
             var tag = $(this).text().substring(1);
             window.location.href = '/tag/' + encodeURIComponent(tag);

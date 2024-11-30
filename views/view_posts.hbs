@@ -13,7 +13,7 @@
     {{#each posts}}
         <div class="post-container">
             <div class="post-header">
-                <div >{{authorEmail}}</div>
+                <div class="authorEmail">{{authorEmail}}</div>
                 <button class="copy-button" data-content-id="content-{{_id}}" aria-label="Copy content"></button>
             </div>
             
@@ -24,7 +24,7 @@
                 {{content}}
             </div>
             <div class="post-footer">
-                <div>#{{tag}}</div>
+                <div class="tag">#{{tag}}</div>
                 <div>{{formatDate date}}</div>
             </div>
         </div>
@@ -38,6 +38,16 @@
         $('#search-button').on('click', function() {
             var searchQuery = $('#search-bar').val();
             window.location.href = '/search?queryString=' + searchQuery;
+        });
+
+        $('.authorEmail').on('click', function(){
+            var authorEmail = $(this).text();
+            window.location.href = '/author/' +  encodeURIComponent(authorEmail);
+        });
+
+        $('.tag').on('click', function(){
+            var tag = $(this).text().substring(1);
+            window.location.href = '/tag/' + encodeURIComponent(tag);
         });
 
         $('.copy-button').each(function() {

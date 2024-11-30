@@ -273,3 +273,15 @@ textarea.form-control {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5);
 }
+
+.authorEmail:hover{
+    color: #007BFF;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tag:hover{
+    color: #007BFF;
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -46,6 +46,40 @@ function fRoutes(app) {
       }
     });
 
+    app.get("/author/:authorEmail", function(req, res) {
+      const modelPost = require("../models/createPostsSchema.js");
+      try{
+        modelPost
+          .find({ authorEmail: decodeURIComponent(req.params.authorEmail) })
+          .lean()
+          .then(function (posts) {
+            res.render("view_author_posts", {
+              username: req.params.authorEmail,
+              posts: posts,
+            });
+          });
+      }catch(err){
+        console.log("ERROR retrieving posts: " + err);
+      }
+    });
+
+    app.get("/tag/:tag", function(req, res) {
+      const modelPost = require("../models/createPostsSchema.js");
+      try{
+        modelPost
+          .find({ tag: decodeURIComponent(req.params.tag) })
+          .lean()
+          .then(function (posts) {
+            res.render("view_tag_posts", {
+              searchTag: req.params.tag,
+              posts: posts,
+            });
+          });
+      }catch(err){
+        console.log("ERROR retrieving posts: " + err);
+      }
+    });
+
     app.get("/create", function(req, res) {
       res.render("create_post");
     });
